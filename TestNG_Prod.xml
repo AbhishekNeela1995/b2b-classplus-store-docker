@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="automation-classplus-store">
+	<parameter name="browser" value="Chrome" />
+	<parameter name="language" value="en" />
+	<!-- <parameter name="languages" value="en" />-->
+
+	<!-- <parameter name="language" value="fr" /> -->
+	
+	<parameter name="siteURL" value="https://web.classplusapp.com/" />
+
+	<parameter name="orgCode2" value="learn" />
+	<!-- <parameter name="orgCode2" value="ironman" /> -->
+	<!--<parameter name="mobileNumber2" value="7290085267" />-->
+	<!--<parameter name="emailAddress2" value="gunjan@classplusapp.com" />-->
+
+	<!-- Faculty side automation -->
+
+	<parameter name="orgCode3" value="learn" />
+	<!--<parameter name="mobileNumber3" value="9966119838" />-->
+	<!--<parameter name="mobileNumber5" value="9885672403" />-->
+
+<!--	<parameter name="emailAddress3" value="gunjan@classplusappp.com" />-->
+
+	<!-- Parent side automation -->
+	<parameter name="orgCode4" value="learn" />
+	<!--<parameter name="mobileNumber4" value="9899805993" />-->
+	<!--<parameter name="emailAddress4" value="gunjan@classplusappp.com" />-->
+
+	<test name="New tutor side automation">
+		<classes>
+			<class name="com.classplusapp.web.tests.newtutor.TutorCoursesHomeTest" />
+			
+		</classes>
+	</test>
+	</suite>
+	

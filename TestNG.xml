@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="automation-classplus-store">
+	<parameter name="browser" value="Chrome" />
+	<parameter name="language" value="en" />
+	<!-- <parameter name="languages" value="en" />-->
+
+	<!-- <parameter name="language" value="fr" /> -->
+	<!-- Tutor package side automation -->
+	<!-- <parameter name="siteURL" value="https://web.classplusapp.com/newApp/login" 
+		/> -->
+	<parameter name="siteURL" value="https://webp-gcp.classplusapp.com/" />
+	<!-- <parameter name="siteURL" value="https://web.classplusapp.com/newApp/login" 
+		/> -->
+	<!-- <parameter name="siteURL"
+		value="https://web.classplusapp.com" /> -->
+	<parameter name="orgCode" value="learn" />
+	<!-- <parameter name="mobileNumber" value="9711153079" />-->
+		<!-- <parameter name="mobileNumber" value="9711153079" />-->
+	
+	<!-- <parameter name="emailAddress" value="gunjan@classplusapp.com" />-->
+	<!-- <parameter name="siteURL" value="https://golive.staging.classplus.co" 
+		/> -->
+
+	<!-- <parameter name="siteURL" value="https://golive.staging.classplus.co" 
+		/> -->
+	<!-- <parameter name="siteURL" value="https://wl-ui-8.staging.classplus.co/newApp/login" 
+		/> -->
+
+	<parameter name="orgCode2" value="learn" />
+	<!-- <parameter name="orgCode2" value="ironman" /> -->
+	<!--<parameter name="mobileNumber2" value="7290085267" />-->
+	<!--<parameter name="emailAddress2" value="gunjan@classplusapp.com" />-->
+
+	<!-- Faculty side automation -->
+
+	<parameter name="orgCode3" value="learn" />
+	<!--<parameter name="mobileNumber3" value="9966119838" />-->
+	<!--<parameter name="mobileNumber5" value="9885672403" />-->
+<!--	<parameter name="emailAddress3" value="gunjan@classplusappp.com" />-->
+
+	<!-- Parent side automation -->
+	<parameter name="orgCode4" value="learn" />
+	<!--<parameter name="mobileNumber4" value="9899805993" />-->
+	<!--<parameter name="emailAddress4" value="gunjan@classplusappp.com" />-->
+
+	<test name="Faculty side automation">
+		<classes>
+			<class name="com.classplusapp.web.tests.faculty.FacultyAddContentTest" />
+			<class name="com.classplusapp.web.tests.faculty.TutorAddingFacultyToCourseTest" />
+			<class name="com.classplusapp.web.tests.faculty.FacultyAnnouncementTest" />
+			<class name="com.classplusapp.web.tests.faculty.FacultySearchCourseTest" />
+		</classes>
+	</test>
+	<test name="Tutor side automation">
+		<classes>
+			<class name="com.classplusapp.web.tests.tutor.TutorCouponCodeTest" />
+			<class name="com.classplusapp.web.tests.ClassplusLoginTest" />
+			<class name="com.classplusapp.web.tests.tutor.TutorCreateCourseTest" />
+			<class name="com.classplusapp.web.tests.tutor.TutorEditCourseTest" />
+			<class name="com.classplusapp.web.tests.tutor.TutorAddContentTest" />
+			<class name="com.classplusapp.web.tests.tutor.TutorCouponCodeTest" />
+			<class name="com.classplusapp.web.tests.tutor.TutorStudentSortingTest" />
+			<class name="com.classplusapp.web.tests.tutor.TutorCreateInstallmentTest" />
+			<class name="com.classplusapp.web.tests.tutor.TutorMerchantDashboardTest" />
+			<class name="com.classplusapp.web.tests.tutor.TutorAnnouncementTest" />
+			<class name="com.classplusapp.web.tests.tutor.TutorMarkFeaturedTest" />
+			<class name="com.classplusapp.web.tests.tutor.TutorResellerSettingsTest" />
+			<!--<class name="com.classplusapp.web.tests.tutor.TutorContentMarketTest" /> -->
+			<class name="com.classplusapp.web.tests.tutor.TutorCustomBannerTest" />
+			<class name="com.classplusapp.web.tests.tutor.TutorCourseSortFilterTest" />
+			<class name="com.classplusapp.web.tests.tutor.TutorDashboardTest" />
+			<class name="com.classplusapp.web.tests.tutor.TutorNotificationTest" />
+			<class name="com.classplusapp.web.tests.tutor.TutorPayInInstallmentTest" />
+			<!--<class name="com.classplusapp.web.tests.tutor.TutorTrialClassTest" />	 -->	
+		</classes>
+</test>
+	<test name="Student side automation">
+		<classes>
+	<class name="com.classplusapp.web.tests.student.PdfDownloadTest" />
+			<class name="com.classplusapp.web.tests.student.StudentBuyCourseTest" />
+			<class name="com.classplusapp.web.tests.student.StudentCourseOverviewTest" />
+			<class name="com.classplusapp.web.tests.student.StudentPaymentInInstallmentTest" />
+			<class name="com.classplusapp.web.tests.student.StudentPhysicalShipmentTest" />
+			<class name="com.classplusapp.web.tests.student.StudentViewContentTest" />
+	</classes>
+	</test>
+	<test name="Parent side automation">
+		<classes>
+			<class name="com.classplusapp.web.tests.parent.ParentBuyCourseTest" />
+			<class name="com.classplusapp.web.tests.parent.ParentViewContentTest" />
+		</classes>
+	</test>
+</suite>
