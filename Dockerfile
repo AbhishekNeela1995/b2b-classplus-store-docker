@@ -19,7 +19,8 @@ ADD TestNG.xml				TestNG.xml
 ADD TestNG_Prod.xml					TestNG_Prod.xml
 
 # ADD health check script
-RUN wget https://s3.amazonaws.com/b2b-classplus-store-docker/healthcheck/healthcheck.sh
+ADD healthcheck.sh healthcheck.sh
+RUN dos2unix healthcheck.sh
 
 # BROWSER
 # HUB_HOST
