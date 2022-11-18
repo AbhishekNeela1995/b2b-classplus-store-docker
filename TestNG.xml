@@ -45,9 +45,9 @@
 
 	<test name="Faculty side automation">
 		<classes>
-			<class name="com.classplusapp.web.tests.faculty.FacultyAddContentTest" />
-			<class name="com.classplusapp.web.tests.faculty.TutorAddingFacultyToCourseTest" />
-			<class name="com.classplusapp.web.tests.faculty.FacultyAnnouncementTest" />
+			<!--<class name="com.classplusapp.web.tests.faculty.FacultyAddContentTest" />-->
+			<!--<class name="com.classplusapp.web.tests.faculty.TutorAddingFacultyToCourseTest" />-->
+			<!--<class name="com.classplusapp.web.tests.faculty.FacultyAnnouncementTest" />-->
 			<class name="com.classplusapp.web.tests.faculty.FacultySearchCourseTest" />
 		</classes>
 	</test>
