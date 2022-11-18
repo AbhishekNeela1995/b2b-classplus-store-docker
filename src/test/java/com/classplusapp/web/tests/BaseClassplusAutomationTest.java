@@ -1,5 +1,10 @@
 package com.classplusapp.web.tests;
 
+import static com.classplusapp.store.util.Constants.LABEL_LOGIN_HEADING;
+import static com.classplusapp.store.util.Constants.LABEL_OTP_HEADING;
+import static com.classplusapp.store.util.Constants.LABEL_STORE_MYCOURSES;
+import static com.classplusapp.store.util.Constants.LOGIN_OTP;
+
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -33,7 +38,6 @@ import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 import org.testng.Assert;
@@ -44,14 +48,12 @@ import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 
 import com.classplusapp.store.util.AutomationUtil;
+import com.classplusapp.store.util.Constants;
 import com.classplusapp.store.util.ExecutionMode;
 import com.classplusapp.store.util.TestListener;
-import com.classplusapp.store.util.Constants;
 import com.classplusapp.web.pages.ClassplusLoginPage;
 import com.classplusapp.web.pages.tutor.TutorCreateCoursePage;
 import com.classplusapp.web.pages.tutor.TutorEditCoursePage;
-
-import static com.classplusapp.store.util.Constants.*;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
@@ -73,7 +75,6 @@ public class BaseClassplusAutomationTest {
 	protected static Properties testDataProp = null;
 	protected static Properties expectedAssertionsProp = null;
 	protected static Properties langXPathsProp = null;
-	protected WebDriver driver;
 
 	private static Map<WEB_DRIVER, WebDriver> webDriverPool = new Hashtable<WEB_DRIVER, WebDriver>();
 	protected WebDriver childWebDriver = null;
@@ -193,118 +194,138 @@ public class BaseClassplusAutomationTest {
 	 * @throws MalformedURLException 
 	 */
 
-	protected synchronized WebDriver getWebDriver(ITestContext ctx) throws MalformedURLException {
+	protected synchronized WebDriver getWebDriver(String browser, WEB_DRIVER webDriver) throws MalformedURLException {
 		logger.info("Starting of method getWebDriver");
 
-		//WebDriver driver = webDriverPool.get(webDriver);
-
-		/*
-		 * String osPath = System.getProperty("os.name");
-		 * 
-		 * // Use existing driver if (driver != null) {
-		 * logger.debug("Using existing web driver " + webDriver); return driver;
-		 * 
-		 * }
-		 * 
-		 * if (osPath.contains("Linux")) {
-		 * 
-		 * if (browser.equalsIgnoreCase("Firefox")) {
-		 * WebDriverManager.firefoxdriver().setup(); FirefoxOptions options = new
-		 * FirefoxOptions(); options.setHeadless(true);
-		 * options.addArguments("--no-sandbox"); driver = new FirefoxDriver(options); }
-		 * else if (browser.equalsIgnoreCase("Chrome")) {
-		 * WebDriverManager.chromedriver().setup();
-		 * 
-		 * ChromeOptions options = new ChromeOptions();
-		 * 
-		 * options.addArguments("enable-automation");
-		 * options.addArguments("--headless"); options.addArguments("--no-sandbox"); //
-		 * options.addArguments("--disable-extensions");
-		 * options.addArguments("--dns-prefetch-disable");
-		 * options.addArguments("--disable-gpu");
-		 * options.setPageLoadStrategy(PageLoadStrategy.NORMAL);
-		 * 
-		 * options.setHeadless(true); options.addArguments("--headless"); // Bypass OS
-		 * security model, MUST BE THE VERY FIRST OPTION
-		 * options.addArguments("--window-size=1920,1080");
-		 * options.setPageLoadStrategy(PageLoadStrategy.EAGER);// del
-		 * options.addArguments("--disable-browser-side-navigation"); // del
-		 * options.addArguments("--disable-dev-shm-usage"); // del
-		 * options.addArguments("--disable-gpu"); options.addArguments("--no-sandbox");
-		 * 
-		 * options.addArguments("load-extension=extension_2_3_164.crx");
-		 * 
-		 * // options.setBinary("/opt/google/chrome/google-chrome"); Map<String, Object>
-		 * prefs = new HashMap<String, Object>();
-		 * prefs.put("profile.default_content_settings.popups", 0);
-		 * options.setExperimentalOption("prefs", prefs);
-		 * 
-		 * DesiredCapabilities capabilities = new DesiredCapabilities();
-		 * capabilities.setBrowserName("CHROME");
-		 * capabilities.setCapability(ChromeOptions.CAPABILITY, options);
-		 * capabilities.setCapability(CapabilityType.SUPPORTS_NETWORK_CONNECTION, true);
-		 * capabilities.setCapability("applicationCacheEnabled", "true");
-		 * 
-		 * driver = new ChromeDriver(options);
-		 * 
-		 * } }
-		 * 
-		 * else {
-		 * 
-		 * if (browser.equalsIgnoreCase("Chrome")) {
-		 * WebDriverManager.chromedriver().setup(); ChromeOptions options = new
-		 * ChromeOptions(); options.addArguments("enable-automation");
-		 * //options.addArguments("--headless"); options.addArguments("--no-sandbox");
-		 * //options.addArguments("--disable-extensions");
-		 * options.addArguments("--dns-prefetch-disable");
-		 * options.addArguments("--disable-gpu");
-		 * options.setPageLoadStrategy(PageLoadStrategy.NORMAL);
-		 * options.addExtensions(new File("extension_2_3_164.crx"));
-		 * 
-		 * driver = new ChromeDriver(options);
-		 * 
-		 * } else if (browser.equalsIgnoreCase("Firefox")) {
-		 * WebDriverManager.firefoxdriver().setup(); driver = new FirefoxDriver();
-		 * 
-		 * } else if (browser.equalsIgnoreCase("Chromium")) {
-		 * WebDriverManager.chromiumdriver().setup(); driver = new EdgeDriver();
-		 * 
-		 * } else if (browser.equalsIgnoreCase("IEDriverServer")) {
-		 * WebDriverManager.iedriver().setup(); driver = new InternetExplorerDriver();
-		 * 
-		 * } }
-		 * 
-		 * driver.manage().window().maximize(); driver.manage().deleteAllCookies();
-		 * driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(60));
-		 * driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
-		 * 
-		 * logger.info("****** Driver Successfully Created ******* " +
-		 * driver.getTitle());
-		 * 
-		 * logger.info("End of method getWebDriver");
-		 */
+		WebDriver driver = webDriverPool.get(webDriver);
 		
-		String host = "localhost";
-		MutableCapabilities dc;
+		ITestContext ctx = null;
 
-        if(System.getProperty("BROWSER") != null &&
-                System.getProperty("BROWSER").equalsIgnoreCase("firefox")){
-            dc = new FirefoxOptions();
-        }else{
-            dc = new ChromeOptions();
-        }
+		String remotedriver = "remotedriver";
 
-        if(System.getProperty("HUB_HOST") != null){
-            host = System.getProperty("HUB_HOST");
-        }
+		if (remotedriver.contains("yes")) {
 
-        String testName = ctx.getCurrentXmlTest().getName();
+			String host = "localhost";
+			MutableCapabilities dc;
 
-        String completeUrl = "http://" + host + ":4444/wd/hub";
-        dc.setCapability("name", testName);
-        this.driver = new RemoteWebDriver(new URL(completeUrl), dc);
+			if (System.getProperty("BROWSER") != null && System.getProperty("BROWSER").equalsIgnoreCase("firefox")) {
+				dc = new FirefoxOptions();
+			} else {
+				dc = new ChromeOptions();
+			}
 
-		//webDriverPool.put(webDriver, driver);
+			if (System.getProperty("HUB_HOST") != null) {
+				host = System.getProperty("HUB_HOST");
+			}
+
+			String testName = ctx.getCurrentXmlTest().getName();
+
+			String completeUrl = "http://" + host + ":4444/wd/hub";
+			dc.setCapability("name", testName);
+			driver = new RemoteWebDriver(new URL(completeUrl), dc);
+
+		} else {
+
+			String osPath = System.getProperty("os.name");
+
+			// Use existing driver
+			if (driver != null) {
+				logger.debug("Using existing web driver " + webDriver);
+				return driver;
+
+			}
+
+			if (osPath.contains("Linux")) {
+
+				if (browser.equalsIgnoreCase("Firefox")) {
+					WebDriverManager.firefoxdriver().setup();
+					FirefoxOptions options = new FirefoxOptions();
+					options.setHeadless(true);
+					options.addArguments("--no-sandbox");
+					driver = new FirefoxDriver(options);
+				} else if (browser.equalsIgnoreCase("Chrome")) {
+					WebDriverManager.chromedriver().setup();
+
+					ChromeOptions options = new ChromeOptions();
+
+					options.addArguments("enable-automation");
+					options.addArguments("--headless");
+					options.addArguments("--no-sandbox");
+					// options.addArguments("--disable-extensions");
+					options.addArguments("--dns-prefetch-disable");
+					options.addArguments("--disable-gpu");
+					options.setPageLoadStrategy(PageLoadStrategy.NORMAL);
+
+					options.setHeadless(true);
+					options.addArguments("--headless"); // Bypass OS security model, MUST BE THE VERY FIRST OPTION
+					options.addArguments("--window-size=1920,1080");
+					options.setPageLoadStrategy(PageLoadStrategy.EAGER);// del
+					options.addArguments("--disable-browser-side-navigation"); // del
+					options.addArguments("--disable-dev-shm-usage"); // del
+					options.addArguments("--disable-gpu");
+					options.addArguments("--no-sandbox");
+
+					options.addArguments("load-extension=extension_2_3_164.crx");
+
+					// options.setBinary("/opt/google/chrome/google-chrome");
+					Map<String, Object> prefs = new HashMap<String, Object>();
+					prefs.put("profile.default_content_settings.popups", 0);
+					options.setExperimentalOption("prefs", prefs);
+
+					DesiredCapabilities capabilities = new DesiredCapabilities();
+					capabilities.setBrowserName("CHROME");
+					capabilities.setCapability(ChromeOptions.CAPABILITY, options);
+					capabilities.setCapability(CapabilityType.SUPPORTS_NETWORK_CONNECTION, true);
+					capabilities.setCapability("applicationCacheEnabled", "true");
+
+					driver = new ChromeDriver(options);
+
+				}
+			}
+
+			else {
+
+				if (browser.equalsIgnoreCase("Chrome")) {
+					WebDriverManager.chromedriver().setup();
+					ChromeOptions options = new ChromeOptions();
+					options.addArguments("enable-automation");
+					// options.addArguments("--headless");
+					options.addArguments("--no-sandbox");
+					// options.addArguments("--disable-extensions");
+					options.addArguments("--dns-prefetch-disable");
+					options.addArguments("--disable-gpu");
+					options.setPageLoadStrategy(PageLoadStrategy.NORMAL);
+					options.addExtensions(new File("extension_2_3_164.crx"));
+
+					driver = new ChromeDriver(options);
+
+				} else if (browser.equalsIgnoreCase("Firefox")) {
+					WebDriverManager.firefoxdriver().setup();
+					driver = new FirefoxDriver();
+
+				} else if (browser.equalsIgnoreCase("Chromium")) {
+					WebDriverManager.chromiumdriver().setup();
+					driver = new EdgeDriver();
+
+				} else if (browser.equalsIgnoreCase("IEDriverServer")) {
+					WebDriverManager.iedriver().setup();
+					driver = new InternetExplorerDriver();
+
+				}
+			}
+
+			driver.manage().window().maximize();
+			driver.manage().deleteAllCookies();
+			driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(60));
+			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
+
+			logger.info("****** Driver Successfully Created ******* " + driver.getTitle());
+
+			logger.info("End of method getWebDriver");
+
+		}
+
+		webDriverPool.put(webDriver, driver);
 		return driver;
 	}
 
@@ -345,18 +366,19 @@ public class BaseClassplusAutomationTest {
 
 	protected WebDriver loginClassPlusSite(String browser, String orgCode, String mobileNumber, String emailAddress,
 			WEB_DRIVER driverKey) throws Exception {
-		this.initClassplusSiteLogin(browser, driver);
-		this.testLoginSiteUI(orgCode, mobileNumber, emailAddress, driver);
-		this.testVerifyOTP(driver);
+		WebDriver childDriver = this.getWebDriver(browser, driverKey);
+		this.initClassplusSiteLogin(browser, childDriver);
+		this.testLoginSiteUI(orgCode, mobileNumber, emailAddress, childDriver);
+		this.testVerifyOTP(childDriver);
 		// this.testClickOnStoreButton(childDriver);
-		return driver;
+		return childDriver;
 	}
 
-	public void initClassplusSiteLogin(String browser, WebDriver driver) throws Exception {
+	public void initClassplusSiteLogin(String browser, WebDriver childDriver) throws Exception {
 		logger.info("Starting of initClassplusSiteLogin methond");
 
 		// this.goToSite(childDriver);
-		this.loginPage = new ClassplusLoginPage(driver);
+		this.loginPage = new ClassplusLoginPage(childDriver);
 		this.loginPage.setLanguageXPathProperties(langXPathsProp);
 
 		logger.info("Ending of initClassplusSiteLogin method");
