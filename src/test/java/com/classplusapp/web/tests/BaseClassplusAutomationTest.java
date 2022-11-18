@@ -201,9 +201,7 @@ public class BaseClassplusAutomationTest {
 		
 		ITestContext ctx = null;
 
-		String remotedriver = "remotedriver";
-
-		if (remotedriver.contains("yes")) {
+		if (System.getProperty("REMOTE_DRIVER") != null && System.getProperty("REMOTE_DRIVER").equalsIgnoreCase("true")) {
 
 			String host = "localhost";
 			MutableCapabilities dc;
