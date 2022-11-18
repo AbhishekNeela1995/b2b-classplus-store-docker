@@ -13,12 +13,6 @@ ADD target/libs							libs
 
 # in case of any other dependency like .csv / .json / .xls
 # please ADD that as well
-#ADD src/main/resources/lang/en/expectedassertions_en         src/main/resources/lang/en/expectedassertions_en
-#ADD src/main/resources/lang/en/testdata_en         src/main/resources/lang/en/testdata_en
-#ADD src/main/resources/lang/en/xpaths_en         src/main/resources/lang/en/xpaths_en
-#ADD src/main/resources/lang/fr/expectedassertions_fr         src/main/resources/lang/fr/expectedassertions_fr
-#ADD src/main/resources/lang/fr/testdata_fr         src/main/resources/lang/fr/testdata_fr
-#ADD src/main/resources/lang/fr/xpaths_fr         src/main/resources/lang/fr/xpaths_fr
 COPY src/main/resources         src/main/resources
 ADD extension_2_3_164.crx    extension_2_3_164.crx
 
