@@ -13,6 +13,7 @@ ADD target/libs							libs
 
 # in case of any other dependency like .csv / .json / .xls
 # please ADD that as well
+ADD src/main/resources/**         src/main/resources/**
 
 # ADD suite files
 ADD TestNG.xml				TestNG.xml
