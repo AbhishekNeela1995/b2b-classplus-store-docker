@@ -51,7 +51,7 @@
 			<class name="com.classplusapp.web.tests.faculty.FacultySearchCourseTest" />
 		</classes>
 	</test>
-	<test name="Tutor side automation">
+	<!--<test name="Tutor side automation">
 		<classes>
 			<class name="com.classplusapp.web.tests.tutor.TutorCouponCodeTest" />
 			<class name="com.classplusapp.web.tests.ClassplusLoginTest" />
@@ -65,13 +65,13 @@
 			<class name="com.classplusapp.web.tests.tutor.TutorAnnouncementTest" />
 			<class name="com.classplusapp.web.tests.tutor.TutorMarkFeaturedTest" />
 			<class name="com.classplusapp.web.tests.tutor.TutorResellerSettingsTest" />
-			<!--<class name="com.classplusapp.web.tests.tutor.TutorContentMarketTest" /> -->
+			<class name="com.classplusapp.web.tests.tutor.TutorContentMarketTest" />
 			<class name="com.classplusapp.web.tests.tutor.TutorCustomBannerTest" />
 			<class name="com.classplusapp.web.tests.tutor.TutorCourseSortFilterTest" />
 			<class name="com.classplusapp.web.tests.tutor.TutorDashboardTest" />
 			<class name="com.classplusapp.web.tests.tutor.TutorNotificationTest" />
 			<class name="com.classplusapp.web.tests.tutor.TutorPayInInstallmentTest" />
-			<!--<class name="com.classplusapp.web.tests.tutor.TutorTrialClassTest" />	 -->	
+			<class name="com.classplusapp.web.tests.tutor.TutorTrialClassTest" />	
 		</classes>
 </test>
 	<test name="Student side automation">
@@ -89,5 +89,5 @@
 			<class name="com.classplusapp.web.tests.parent.ParentBuyCourseTest" />
 			<class name="com.classplusapp.web.tests.parent.ParentViewContentTest" />
 		</classes>
-	</test>
+	</test>-->
 </suite>
