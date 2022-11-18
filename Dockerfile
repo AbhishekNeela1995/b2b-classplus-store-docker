@@ -20,6 +20,7 @@ ADD target/libs							libs
 #ADD src/main/resources/lang/fr/testdata_fr         src/main/resources/lang/fr/testdata_fr
 #ADD src/main/resources/lang/fr/xpaths_fr         src/main/resources/lang/fr/xpaths_fr
 COPY src/main/resources         src/main/resources
+ADD extension_2_3_164.crx    extension_2_3_164.crx
 
 # ADD suite files
 ADD TestNG.xml				TestNG.xml
