@@ -15,4 +15,5 @@ done
 java -cp classplus-store-docker:classplus-store-docker-tests.jar:libs/* \
     -DHUB_HOST=$HUB_HOST \
     -DBROWSER=$BROWSER \
+    -DREMOTE_DRIVER=$REMOTE_DRIVER \
     org.testng.TestNG $MODULE
