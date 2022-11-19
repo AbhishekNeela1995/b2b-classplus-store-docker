@@ -191,17 +191,18 @@ public class BaseClassplusAutomationTest {
 	 * 
 	 * @param webDriver
 	 * @return
-	 * @throws MalformedURLException 
+	 * @throws MalformedURLException
 	 */
 
 	protected synchronized WebDriver getWebDriver(String browser, WEB_DRIVER webDriver) throws MalformedURLException {
 		logger.info("Starting of method getWebDriver");
 
 		WebDriver driver = webDriverPool.get(webDriver);
-		
+
 		ITestContext ctx = null;
 
-		if (System.getProperty("REMOTE_DRIVER") != null && System.getProperty("REMOTE_DRIVER").equalsIgnoreCase("true")) {
+		if (System.getProperty("REMOTE_DRIVER") != null
+				&& System.getProperty("REMOTE_DRIVER").equalsIgnoreCase("true")) {
 
 			String host = "localhost";
 			MutableCapabilities dc;
@@ -221,6 +222,10 @@ public class BaseClassplusAutomationTest {
 			String completeUrl = "http://" + host + ":4444/wd/hub";
 			dc.setCapability("name", testName);
 			driver = new RemoteWebDriver(new URL(completeUrl), dc);
+			driver.manage().window().maximize();
+			driver.manage().deleteAllCookies();
+			driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(60));
+			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
 
 		} else {
 
@@ -310,17 +315,17 @@ public class BaseClassplusAutomationTest {
 					driver = new InternetExplorerDriver();
 
 				}
+
+				driver.manage().window().maximize();
+				driver.manage().deleteAllCookies();
+				driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(60));
+				driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
+
+				logger.info("****** Driver Successfully Created ******* " + driver.getTitle());
+
+				logger.info("End of method getWebDriver");
+
 			}
-
-			driver.manage().window().maximize();
-			driver.manage().deleteAllCookies();
-			driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(60));
-			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
-
-			logger.info("****** Driver Successfully Created ******* " + driver.getTitle());
-
-			logger.info("End of method getWebDriver");
-
 		}
 
 		webDriverPool.put(webDriver, driver);
